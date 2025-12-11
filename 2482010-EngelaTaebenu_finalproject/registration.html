@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background-color: #F6E7D8; /* Latte soft background */
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #F7EDE2;
+            border-radius: 0.5rem;
+            border: 1px solid #C9B29A;
+            color: #4A3426;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #8B6F52;
+            box-shadow: 0 0 5px rgba(139,111,82,0.4);
+        }
+
+        .btn-brown {
+            background-color: #8B6F52;
+            color: #F7EDE2;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .btn-brown:hover {
+            background-color: #6B4F3A;
+        }
+
+        .error-msg {
+            color: #7b2f45;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+
+<body class="text-[#4A3426]">
+
+    <!-- NAVBAR: sama seperti halaman lain -->
+    <nav class="bg-[#6B4F3A] text-[#F3E5D8] py-4 shadow-md">
+        <div class="max-w-6xl mx-auto flex justify-center gap-10 text-lg font-semibold">
+            <a href="index.html" class="hover:text-white">Home</a>
+            <a href="about.html" class="hover:text-white">About</a>
+            <a href="gallery.html" class="hover:text-white">Gallery</a>
+            <a href="calculator.html" class="hover:text-white">Calculator</a>
+            <a href="registration.html" class="text-white underline">Registration</a>
+        </div>
+    </nav>
+
+    <h1 class="text-center text-3xl font-bold py-6 bg-[#8B6F52] text-[#F7EDE2] shadow-lg">
+        Registration
+    </h1>
+
+    <!-- FORM REGISTRATION -->
+    <div class="max-w-md mx-auto bg-[#E8D6C0] text-[#4A3426] p-6 rounded-xl shadow-xl mt-10">
+
+        <form id="regForm" class="space-y-4">
+
+            <div>
+                <label class="font-semibold">First Name</label>
+                <input id="firstName" maxlength="40" class="input-field" placeholder="max 40 characters">
+                <p id="fnErr" class="error-msg hidden"></p>
+            </div>
+
+            <div>
+                <label class="font-semibold">Last Name</label>
+                <input id="lastName" maxlength="40" class="input-field" placeholder="max 40 characters">
+                <p id="lnErr" class="error-msg hidden"></p>
+            </div>
+
+            <div>
+                <label class="font-semibold">NIM</label>
+                <input id="nim" inputmode="numeric" class="input-field" placeholder="max 7 digits">
+                <p id="nimErr" class="error-msg hidden"></p>
+            </div>
+
+            <div>
+                <label class="font-semibold">Phone Number</label>
+                <input id="phone" inputmode="numeric" class="input-field" placeholder="max 15 digits">
+                <p id="phoneErr" class="error-msg hidden"></p>
+            </div>
+
+            <div>
+                <label class="font-semibold">Email (@unai.edu)</label>
+                <input id="email" type="email" class="input-field" placeholder="example@unai.edu">
+                <p id="emailErr" class="error-msg hidden"></p>
+            </div>
+
+            <div>
+                <label class="font-semibold">Password</label>
+                <input id="password" type="password" class="input-field" 
+                placeholder="8–16 chars, upper/lowercase, numbers">
+                <p id="pwErr" class="error-msg hidden"></p>
+            </div>
+
+            <div class="flex gap-4">
+                <button id="submitBtn" class="btn-brown w-full text-center">
+                    Submit
+                </button>
+
+                <button type="reset" class="btn-brown w-full text-center">
+                    Reset
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <footer class="mt-12 pb-8 text-center text-sm font-semibold text-[#4A3426]">
+        © Engela Taebenu.
+    </footer>
+
+    <script>
+        document.getElementById("regForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let valid = true;
+
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const nim = document.getElementById("nim").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            const showError = (id, msg) => {
+                const el = document.getElementById(id);
+                el.textContent = msg;
+                el.classList.remove("hidden");
+            };
+
+            const hideError = (id) => {
+                document.getElementById(id).classList.add("hidden");
+            };
+
+            if (firstName === "") { valid = false; showError("fnErr", "First name is required!"); }
+            else hideError("fnErr");
+
+            if (lastName === "") { valid = false; showError("lnErr", "Last name is required!"); }
+            else hideError("lnErr");
+
+            if (!/^\d{1,7}$/.test(nim)) {
+                valid = false;
+                showError("nimErr", "Student ID must be numeric, max 7 digits!");
+            } else hideError("nimErr");
+
+            if (!/^\d{1,15}$/.test(phone)) {
+                valid = false;
+                showError("phoneErr", "Phone number max 15 digits!");
+            } else hideError("phoneErr");
+
+            if (!/^[A-Za-z0-9._%+-]+@unai\.edu$/.test(email)) {
+                valid = false;
+                showError("emailErr", "Email must end with @unai.edu!");
+            } else hideError("emailErr");
+
+            if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password)) {
+                valid = false;
+                showError("pwErr", "Password must contain upper/lowercase & numbers.");
+            } else hideError("pwErr");
+
+            if (valid) {
+                alert("Registration Successful!");
+                document.getElementById("regForm").reset();
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#F6E7D8] text-[#4A3426]"> <!-- Background latte -->
+
+    <!-- NAVBAR -->
+    <nav class="bg-[#6B4F3A] text-[#F3E5D8] py-4 shadow-md">
+        <div class="max-w-6xl mx-auto flex justify-center gap-10 text-lg font-semibold">
+            <a href="index.html" class="hover:text-white">Home</a>
+            <a href="about.html" class="hover:text-white">About</a>
+            <a href="gallery.html" class="hover:text-white">Gallery</a>
+            <a href="calculator.html" class="text-white underline">Calculator</a>
+            <a href="registration.html" class="hover:text-white">Registration</a>
+        </div>
+    </nav>
+
+    <!-- JUDUL -->
+    <h1 class="text-center text-3xl font-bold py-6 bg-[#8B6F52] text-[#F7EDE2] shadow-lg">
+        Calculator
+    </h1>
+
+    <!-- CALCULATOR BOX -->
+    <div class="max-w-sm mx-auto bg-[#E8D6C0] text-[#4A3426] p-6 rounded-xl shadow-xl mt-10">
+
+        <input id="display" class="w-full p-3 text-xl bg-[#F7EDE2] border border-[#C9B29A] rounded mb-4 shadow-inner" disabled>
+
+        <div class="grid grid-cols-4 gap-3">
+
+            <button onclick="press('7')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">7</button>
+            <button onclick="press('8')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">8</button>
+            <button onclick="press('9')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">9</button>
+            <button onclick="press('/')" class="btn bg-[#8B6F52] hover:bg-[#6B4F3A] text-white rounded-xl h-14">/</button>
+
+            <button onclick="press('4')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">4</button>
+            <button onclick="press('5')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">5</button>
+            <button onclick="press('6')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">6</button>
+            <button onclick="press('*')" class="btn bg-[#8B6F52] hover:bg-[#6B4F3A] text-white rounded-xl h-14">*</button>
+
+            <button onclick="press('1')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">1</button>
+            <button onclick="press('2')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">2</button>
+            <button onclick="press('3')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">3</button>
+            <button onclick="press('-')" class="btn bg-[#8B6F52] hover:bg-[#6B4F3A] text-white rounded-xl h-14">-</button>
+
+            <button onclick="press('0')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">0</button>
+            <button onclick="press('.')" class="btn bg-[#F7EDE2] hover:bg-[#FFF3E6] border rounded-xl h-14 shadow">.</button>
+
+            <button onclick="calculate()" 
+                    class="btn bg-[#6B4F3A] hover:bg-[#4A3426] text-white font-bold rounded-xl h-14 shadow">
+                =
+            </button>
+
+            <button onclick="press('+')" class="btn bg-[#8B6F52] hover:bg-[#6B4F3A] text-white rounded-xl h-14">+</button>
+        </div>
+
+        <button onclick="clearDisplay()" 
+                class="w-full mt-4 p-3 bg-[#8B6F52] hover:bg-[#6B4F3A] text-white font-bold rounded-xl shadow">
+            Clear
+        </button>
+
+    </div>
+
+    <script>
+        const display = document.getElementById("display");
+
+        function press(value) {
+            display.value += value;
+        }
+
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = "Error";
+            }
+        }
+
+        function clearDisplay() {
+            display.value = "";
+        }
+    </script>
+<footer class="mt-12 pb-8 text-center text-sm font-semibold text-[#4A3426]">
+    © Engela Taebenu.
+</footer>
+</body>
+</html>
